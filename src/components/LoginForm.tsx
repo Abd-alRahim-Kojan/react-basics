@@ -1,14 +1,9 @@
+import type { IUserData } from "../interfaces";
+
 interface IProps {
   setLogin: (value: boolean) => void;
   userData: IUserData;
   setUserData: (data: IUserData) => void;
-}
-
-interface IUserData {
-  username: string;
-  email: string;
-  password: string;
-  address: string;
 }
 
 export default function LoginForm({ setLogin, userData, setUserData }: IProps) {
@@ -71,6 +66,16 @@ export default function LoginForm({ setLogin, userData, setUserData }: IProps) {
             id="address"
             name="address"
             value={userData.address}
+            onChange={onChangeHandler}
+          />
+          <br />
+          <br />
+          <label htmlFor="phone">Phone:</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={userData.phone}
             onChange={onChangeHandler}
           />
           <br />

@@ -2,17 +2,20 @@ import { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import LoginForm from "./components/LoginForm";
+import UserDetails from "./components/UserDetails";
+import type { IUserData } from "./interfaces";
 
 function App() {
   const company = "My Company";
   const aboutCompany = "About Us";
   const [isLogged, setIsLoggedIn] = useState(false);
 
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<IUserData>({
     username: "",
     email: "",
     password: "",
     address: "",
+    phone: "",
   });
 
   return (
@@ -25,7 +28,7 @@ function App() {
       />
 
       {isLogged ? (
-        "Welcome Back!"
+        <UserDetails user={userData} />
       ) : (
         <LoginForm
           userData={userData}
