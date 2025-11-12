@@ -1,3 +1,4 @@
+import { formInputList } from "../data";
 import type { IUserData } from "../interfaces";
 
 interface IProps {
@@ -10,6 +11,7 @@ export default function LoginForm({ setLogin, userData, setUserData }: IProps) {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
+  // handlers
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
@@ -22,6 +24,22 @@ export default function LoginForm({ setLogin, userData, setUserData }: IProps) {
     console.log({ ...userData });
   };
 
+  // renders
+  const renderFormInputs = formInputList.map((input) => (
+    <div key={input.id}>
+      <label htmlFor="{input.id}">{input.label}:</label>
+      <input
+        type={input.type}
+        id={input.id}
+        name={input.name}
+        value={userData[input.name]}
+        onChange={onChangeHandler}
+      />
+      <br />
+      <br />
+    </div>
+  ));
+
   return (
     <>
       <div>
@@ -30,56 +48,7 @@ export default function LoginForm({ setLogin, userData, setUserData }: IProps) {
       </div>
       <form onSubmit={(e) => e.preventDefault()}>
         <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={userData.username}
-            onChange={onChangeHandler}
-          />
-          <br />
-          <br />
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={userData.email}
-            onChange={onChangeHandler}
-          />
-          <br />
-          <br />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={userData.password}
-            onChange={onChangeHandler}
-          />
-          <br />
-          <br />
-          <label htmlFor="address">Address:</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value={userData.address}
-            onChange={onChangeHandler}
-          />
-          <br />
-          <br />
-          <label htmlFor="phone">Phone:</label>
-          <input
-            type="text"
-            id="phone"
-            name="phone"
-            value={userData.phone}
-            onChange={onChangeHandler}
-          />
-          <br />
-          <br />
+          {renderFormInputs}
           <button type="button" onClick={() => setLogin(true)}>
             Login
           </button>
